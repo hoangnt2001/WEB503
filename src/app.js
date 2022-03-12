@@ -1,20 +1,34 @@
 // console.log("hello world!");
 const express = require('express');
+import cors from 'cors';
+import morgan from 'morgan';
+import productRouter from '../routers/product'
 const app = express();
+
 // middleWare
-const checkAuth = (req, res) => {
-    const status = false;
-    if (status) {
-        console.log("chào anh");
-        next();
-    }else{
-        console.log("anh k có quyền truy cập");
-    }
-}
-app.use("/",checkAuth)
-((req, res, next) => {
-    console.log("b2");
-})
+app.use(cors());
+app.use(morgan("tiny"));
+app.use(express.json());
+app.use("/api",productRouter);
+
+const Port = 3001;
+app.listen(Port,()=>{
+    console.log("Server is running Port" , Port);
+});
+
+// const checkAuth = (req, res,next) => {
+//     const status = true;
+//     if (status) {
+//         console.log("chào anh");
+//         next();
+//     }else{
+//         console.log("anh k có quyền truy cập");
+//     }
+// }
+// app.get("/",checkAuth,(req, res)=>{
+//     res.send("<h1>hello</h1>");
+// })
+
 
 
 
@@ -41,7 +55,3 @@ app.use("/",checkAuth)
 //     }
 // });
 
-const Port = 3001;
-server.listen(Port,()=>{
-    console.log("Server is running Port" , Port);
-});
