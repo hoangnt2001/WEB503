@@ -1,12 +1,12 @@
 import mongoose , {Schema} from "mongoose" ;
 const ProductSchema = new Schema({
     name :{
-        type : "string",
+        type : "String",
         minLength :5,
         require:true,
     },
     price:{
-        type : "number",
+        type : "Number",
         require:true,
     }
 },{timestamps:true});

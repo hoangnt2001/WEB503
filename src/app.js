@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import productRouter from '../routers/product';
 import postRouter from '../routers/post'
+import UserRouter from '../routers/User'
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 //router
 app.use("/api",productRouter);
 app.use("/api",postRouter);
+app.use("/",UserRouter)
 //connect database
 mongoose.connect("mongodb://127.0.0.1:27017/we16309")
 .then(()=>console.log("Connect database success"))
