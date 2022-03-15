@@ -4,9 +4,9 @@
 //             {id:3,name:"productB"},
 //             {id:4,name:"productB"},
 //         ];
-import mongoose from "mongoose";
 //khởi tạo model
-const Product = mongoose.model("product",{name:String, price: Number,desc:String})
+
+import Product from '../Models/Product'
 //API thêm sản phẩm
 
 export const create = async (req, res) => {
@@ -34,7 +34,7 @@ export const list = async (req, res) => {
 export const read = async (req, res) => { 
     const filter = {_id : +req.params.id };
     try {
-        const products = await products.findOne(filter);
+        const products = await Product.findOne(filter);
         res.json(products);
     } catch (error) {
         res.status(400).json({
@@ -45,7 +45,7 @@ export const read = async (req, res) => {
 export const remove = async (req, res) => { 
     const conditional = {_id : +req.params.id };
     try {
-        const products = await products.findOneAndDelete(conditional);
+        const products = await Product.findOneAndDelete(conditional);
         res.json({
             message : "xóa rồi còn đâu",
             data: products
@@ -61,7 +61,7 @@ export const update = async (req, res) => {
     const doc = req.body;
     const option = {new :true};
     try {
-        const products = await products.findOneAndUpdate(conditional,doc, option)
+        const products = await Product.findOneAndUpdate(conditional,doc, option)
         res.json(products);
     } catch (error) {
         res.status(400).json({
