@@ -2,15 +2,25 @@
 const express = require('express');
 import cors from 'cors';
 import morgan from 'morgan';
-import productRouter from '../routers/product'
+import mongoose from 'mongoose';
+import productRouter from '../routers/product';
+import postRouter from '../routers/post'
+
 const app = express();
 
 // middleWare
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
+//router
 app.use("/api",productRouter);
+app.use("/api",postRouter);
+//connect database
+mongoose.connect("mongodb://127.0.0.1:27017/we16309")
+.then(()=>console.log("Connect database success"))
+.catch((err)=>console.log(err));
 
+//connection 
 const Port = 3001;
 app.listen(Port,()=>{
     console.log("Server is running Port" , Port);
